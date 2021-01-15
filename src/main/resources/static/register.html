@@ -1,0 +1,49 @@
+<!--
+ * @Description: 
+ * @version: 
+ * @Author: zrz
+ * @Date: 2021-01-02 16:43:50
+ * @LastEditors: zrz
+ * @LastEditTime: 2021-01-02 17:47:40
+-->
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+<meta charset="utf-8">
+<title>注册</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+	<div class="content">
+		<div class="sub-cont">
+			<div class="img">
+				<div class="img__text m--up"></div>
+				<div class="img__text m--in"></div>
+			</div>
+			<div class="form sign-up">
+				<form action="/registerIn" method="post">
+					<h2>立即注册</h2>
+					<label> 
+						<span>用户名</span> <input name="username" type="text" />
+					</label> 
+					<label> 
+						<span>邮箱</span> <input name="email" type="email" />
+					</label> 
+					<label> 
+						<span>密码</span> <input name="pwd" type="password" />
+					</label>
+					<button type="submit" class="submit">注 册</button>
+					<button type="button" class="fb-btn"
+						onclick="window.location.href = '/'">返回主页</button>
+					<!-- <a href = "../../index.html"></a> -->
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<script src="js/script.js"></script>
+</body>
+
+</html>

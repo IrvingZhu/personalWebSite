@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace = "com.zrz.personalWeb.repository.UserMapper"> 
+	
+    <resultMap id="userMap" type="com.zrz.personalWeb.domain.User">
+        <result column="uid" jdbcType="INTEGER" property="id" />
+        <result column="uname" jdbcType="VARCHAR" property="name" />
+        <result column="upwd" jdbcType="VARCHAR" property="pwd" />
+        <result column="umail" jdbcType="VARCHAR" property="email" />
+    </resultMap>
+
+	<select id = "getInfo" parameterType = "String" resultMap = "userMap" resultType = "com.zrz.personalWeb.domain.User">
+		SELECT * FROM user WHERE uname = #{name} AND upwd = #{pwd}
+	</select>
+	
+	<insert id = "setInfo" parameterType = "com.zrz.personalWeb.domain.User">
+		insert into user (uname, upwd, umail) values(#{name}, #{pwd}, #{email})
+	</insert>
+	
+	<!-- check -->
+	<select id = "getInfo_check" parameterType = "String" resultType = "java.lang.Boolean">
+		select uid from user where uname = #{uname}
+	</select>
+</mapper>            

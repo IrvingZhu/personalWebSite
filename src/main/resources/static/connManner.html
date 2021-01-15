@@ -1,0 +1,54 @@
+<!--
+ * @Description: 
+ * @version: 
+ * @Author: zrz
+ * @Date: 2021-01-04 18:00:58
+ * @LastEditors: zrz
+ * @LastEditTime: 2021-01-05 12:21:59
+-->
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>联系方式</title>
+    <style type="text/css">
+        .Main_title {
+            font-size: 64px;
+        }
+    </style>
+    <link type = "text/css" rel = "stylesheet" href="css/layout.css"/>
+</head>
+
+<body style = "overflow-x:scroll">
+    <label for="title"></label>
+    <div align="center" class="Main_title" style="margin:64px">联系方式</div>
+    <div align="center" class="all_conn">
+        <ul class="picture_background">
+            <li id = "qq" style="display:inline-block">
+                <img name = "qq_img" src="image/penguin.jpg" width="256px" height="256px" onmousemove="onMoveOver()" onmouseout = "onMoveOut()"/>
+            </li>
+            <li id = "wechat" style="display:inline-block">
+                <img name = "wechat_img" src="image/wechat.png" width="256px" height="256px" onmousemove = "onMoveOver_wechat()" onmouseout = "onMoveOut_wechat()"/>
+            </li>
+            <li id = "github" style="display:inline-block">
+                <a href = "https://github.com/IrvingZhu">
+                    <img name = "github_img" src="image/github.jpg" width="192px" height="192px" style="margin-bottom:32px"/>
+                </a>
+            </li>
+            <li id = "csdn" style="display:inline-block; margin-right:128px; margin-left:16px">
+                <img name = "csdn_img" src="image/csdn.jpg" width="128px" height="128px" style="margin-left:64px; margin-bottom:56px" />
+            </li>
+        </ul>
+    </div>
+    <!-- <img src = "image/message.jpg" class = "bottom" width = "256px" height = "256px"/>
+    <img src = "image/QQ_2_dim_code.png" class = "top"/> -->
+    <a href = "/">
+        <div align = "center" style = "margin:16px">返回主界面</div>
+    </a>
+</body>
+
+<script src="js/onMove.js"></script>
+
+</html>
