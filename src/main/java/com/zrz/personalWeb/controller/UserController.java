@@ -25,7 +25,7 @@ public class UserController {
 	public String loginIn(@RequestParam("username") String name, @RequestParam("pwd") String pwd) {
 		User us = uservice.login(name, pwd);
 		if(us != null)
-			return "success";
+			return "success\nThis is only test, and the Business handling function is not opening";
 		else
 			return "error";
 	}
@@ -33,7 +33,7 @@ public class UserController {
 	@RequestMapping(value = "/registerIn", method = RequestMethod.POST)
 	public String registerIn(@RequestParam("username") String name, @RequestParam("pwd") String pwd, @RequestParam("email") String email) {
 		if(uservice.register(name, pwd, email))
-			return "success";
+			return "success\nThis is only test, and the Business handling function is not opening";
 		return "error";
 	}
 }
