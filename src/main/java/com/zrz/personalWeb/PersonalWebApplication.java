@@ -11,5 +11,5 @@ public class PersonalWebApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PersonalWebApplication.class, args);
 	}
-
+	
 }
