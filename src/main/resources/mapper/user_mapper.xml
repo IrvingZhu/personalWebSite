@@ -19,6 +19,18 @@
 	
 	<!-- check -->
 	<select id = "getInfo_check" parameterType = "String" resultType = "java.lang.Boolean">
-		select uid from user where uname = #{uname}
+		select uid from user where uname = #{name}
 	</select>
+	
+	<select id = "showInfo" parameterType = "String" resultMap = "userMap" resultType = "com.zrz.personalWeb.domain.User">
+		select * from user where uname = #{name}
+	</select>
+	
+	<update id = "updateUserInfo" parameterType = "String">
+		update user set uname = #{newName} and umail = #{newMail} where uname = #{name}
+	</update>
+	
+	<update id = "updatePwd" parameterType = "String">
+		update user set upwd = #{newPwd} where uname = #{name}
+	</update>
 </mapper>            

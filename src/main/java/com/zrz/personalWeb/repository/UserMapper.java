@@ -13,4 +13,9 @@ public interface UserMapper {
 	
 	Boolean getInfo_check(String name);
 	
+	User showInfo(String name);
+	
+	void updateUserInfo(String name, String newName, String newMail);
+	
+	void updatePwd(String name, String newPwd);
 }

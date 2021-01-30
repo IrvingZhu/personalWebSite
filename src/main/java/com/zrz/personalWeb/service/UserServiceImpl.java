@@ -1,7 +1,5 @@
 package com.zrz.personalWeb.service;
 
-import java.sql.SQLException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,5 +25,31 @@ public class UserServiceImpl implements UserService {
 			return true;
 		}
 		return false;
+	}
+	
+	@Override
+	public User showInfo(String name) {
+		return userMapper.showInfo(name);
+	}
+	
+	@Override
+	public boolean updateInfo(String name, String newName, String newMail) {
+		try {
+			userMapper.updateUserInfo(name, newName, newMail);
+			return true;
+		}
+		catch(Exception e) {
+			throw e;
+		}
+	}
+	
+	@Override
+	public boolean updatePwd(String name, String newPwd) {
+		try {
+			userMapper.updatePwd(name, newPwd);
+			return true;
+		}catch(Exception e) {
+			throw e;
+		}
 	}
 }
