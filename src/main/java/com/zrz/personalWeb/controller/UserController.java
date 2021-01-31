@@ -9,10 +9,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.zrz.personalWeb.domain.User;
 import com.zrz.personalWeb.service.UserService;
+
+import javax.servlet.http.HttpSession;
 
 @RestController
 public class UserController {
@@ -21,10 +22,13 @@ public class UserController {
 	UserService uservice;
 
 	@RequestMapping(value = "/loginIn", method = RequestMethod.POST)
-	public String loginIn(@RequestParam("username") String name, @RequestParam("pwd") String pwd) {
+	public String loginIn(@RequestParam("username") String name, @RequestParam("pwd") String pwd, HttpSession sess) {
 		User us = uservice.login(name, pwd);
-		if (us != null)
+		if (us != null) {
+			sess.setAttribute("uid", us.getId());
+			sess.setAttribute("uname", us.getName());
 			return "success\n" + us.getId() + "\n" + us.getName() + "\n";
+		}
 		else
 			return "error\n";
 	}
