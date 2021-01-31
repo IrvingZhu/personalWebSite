@@ -34,22 +34,34 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public boolean updateInfo(String name, String newName, String newMail) {
-		try {
-			userMapper.updateUserInfo(name, newName, newMail);
+//		only name
+		if(newMail.compareTo("null") == 0) {
+			if(userMapper.getInfo_check(newName) == null) {
+				userMapper.updateName(name, newName);
+				return true;
+			}else {
+				return false;
+			}
+		}
+//		only mail
+		else if(newName.compareTo("null") == 0) {
+			userMapper.updateMail(name, newMail);
 			return true;
 		}
-		catch(Exception e) {
-			throw e;
+//		also name and mail
+		else {
+			if(userMapper.getInfo_check(newName) == null) {
+				userMapper.updateMail(name, newMail);
+				userMapper.updateName(name, newName);
+				return true;
+			}
+			return false;
 		}
 	}
 	
 	@Override
 	public boolean updatePwd(String name, String newPwd) {
-		try {
-			userMapper.updatePwd(name, newPwd);
-			return true;
-		}catch(Exception e) {
-			throw e;
-		}
+		userMapper.updatePwd(name, newPwd);
+		return true;
 	}
 }

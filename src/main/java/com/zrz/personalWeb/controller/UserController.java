@@ -20,27 +20,21 @@ public class UserController {
 	@Autowired
 	UserService uservice;
 
-	// test, when deployed delete it.
-	@RequestMapping("/hello")
-	public String index() {
-		return "hello";
-	}
-
 	@RequestMapping(value = "/loginIn", method = RequestMethod.POST)
 	public String loginIn(@RequestParam("username") String name, @RequestParam("pwd") String pwd) {
 		User us = uservice.login(name, pwd);
 		if (us != null)
-			return "success\nThis is only test, and the Business handling function is not opening";
+			return "success\n" + us.getId() + "\n" + us.getName() + "\n";
 		else
-			return "error";
+			return "error\n";
 	}
 
 	@RequestMapping(value = "/registerIn", method = RequestMethod.POST)
 	public String registerIn(@RequestParam("username") String name, @RequestParam("pwd") String pwd,
 			@RequestParam("email") String email) {
 		if (uservice.register(name, pwd, email))
-			return "success\nThis is only test, and the Business handling function is not opening";
-		return "error";
+			return "success\n";
+		return "error\n";
 	}
 
 	@RequestMapping(value = "/info", method = RequestMethod.POST)
@@ -55,12 +49,16 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String updateUserInfo(String name, String mail) {
-		return "success";
+	public String updateUserInfo(String name, String newName, String newMail) {
+		if(uservice.updateInfo(name, newName, newMail) == true)
+			return "success\n";
+		return "error\n";
 	}
 
 	@RequestMapping(value = "/updatepwd", method = RequestMethod.POST)
-	public String updatePwd(String pwd, String newPwd) {
-		return "success";
+	public String updatePwd(String name, String newPwd) {
+		if(uservice.updatePwd(name, newPwd) == true)
+			return "success\n";
+		return "error\n";
 	}
 }
