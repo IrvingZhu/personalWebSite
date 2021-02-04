@@ -33,12 +33,14 @@ public class BusinessController {
 	@Autowired
 	private BusiService serv;
 	
+//	search business key to front-end's table
 	@RequestMapping(value = "/searchBusi", method = RequestMethod.POST)
 	@ResponseBody
 	public String searchBusiKey(HttpServletRequest request){
 		return JSON.toJSONString(serv.searchBusiKey(Long.parseLong(request.getSession().getAttribute("uid").toString())));
 	}
 	
+//	search information to right side drawer
 	@RequestMapping(value = "/busiDetail", method = RequestMethod.POST)
 	@ResponseBody
 	public String searchBusiInfo(HttpServletRequest request){
@@ -52,6 +54,7 @@ public class BusinessController {
 		return JSON.toJSONString(mp);
 	}
 	
+//	modify business information
 	@RequestMapping(value = "/updateBusiInfo", method = RequestMethod.POST)
 	@ResponseBody
 	public String updateBusiInfo(@RequestBody JSONObject jsobj) {
@@ -66,6 +69,7 @@ public class BusinessController {
 		return JSON.toJSONString("error");
 	}
 	
+//	delete such information
 	@RequestMapping(value = "/deleteBusiness", method = RequestMethod.POST)
 	@ResponseBody
 	public String deleteBusiness(@RequestBody JSONObject jsobj) {

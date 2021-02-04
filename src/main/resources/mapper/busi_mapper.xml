@@ -7,11 +7,11 @@
 		<result column="binfo" jdbcType="VARCHAR" property="info" />
 	</resultMap>
 	
-	<select id = "searchBusiKey" parameterType = "String" resultType = "java.util.Map">
-		select bid, btype from business where bid = (select bid from user_busi_conn where uid = #{uid})
+	<select id = "searchBusiKey" parameterType = "java.lang.Long" resultType = "java.util.Map">
+		select bid, btype from business where bid = any(select bid from user_busi_conn where uid = #{uid})
 	</select>
 	
-	<select id = "searchBusiInfo" parameterType = "String" resultType = "com.zrz.personalWeb.domain.Business">
+	<select id = "searchBusiInfo" parameterType = "java.lang.Long" resultType = "com.zrz.personalWeb.domain.Business">
 		select * from business where bid = #{bid}
 	</select>
 	
