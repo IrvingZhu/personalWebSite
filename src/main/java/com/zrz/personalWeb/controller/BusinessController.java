@@ -41,7 +41,7 @@ public class BusinessController {
 	
 	@RequestMapping(value = "/busiDetail", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> searchBusiInfo(HttpServletRequest request){
+	public String searchBusiInfo(HttpServletRequest request){
 		Business busi = serv.searchBusiInfo(Long.parseLong(request.getSession().getAttribute("uid").toString()));
 		
 		Map<String, Object> mp = new HashMap<>();
@@ -49,7 +49,7 @@ public class BusinessController {
 		mp.put("btype", busi.getBtype());
 		mp.put("binfo", busi.getBinfo());
 		
-		return mp;
+		return JSON.toJSONString(mp);
 	}
 	
 	@RequestMapping(value = "/updateBusiInfo", method = RequestMethod.POST)
