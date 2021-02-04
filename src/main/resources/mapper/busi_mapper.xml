@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zrz.personalWeb.repository.BusinessMapper">
+	<resultMap id="busiMap" type="com.zrz.personalWeb.domain.Business">
+		<result column="bid" jdbcType="INTEGER" property="id" />
+		<result column="btype" jdbcType="VARCHAR" property="type" />
+		<result column="binfo" jdbcType="VARCHAR" property="info" />
+	</resultMap>
+	
+	<select id = "searchBusiKey" parameterType = "String" resultType = "java.util.Map">
+		select bid, btype from business where bid = (select bid from user_busi_conn where uid = #{uid})
+	</select>
+	
+	<select id = "searchBusiInfo" parameterType = "String" resultType = "com.zrz.personalWeb.domain.Business">
+		select * from business where bid = #{bid}
+	</select>
+	
+	<select id = "getBidCheck" parameterType = "java.lang.Long" resultType = "java.lang.Boolean">
+		select bid from business where bid = #{bid}
+	</select>
+	
+	<update id = "updateBusiType">
+		update business set btype = #{btype} where bid = #{bid}
+	</update>
+	
+	<update id = "updateBusiInfo">
+		update business set binfo = #{binfo} where bid = #{bid}
+	</update>
+	
+	<delete id = "deleteBusi" parameterType = "java.lang.Long">
+		delete from business where bid = #{bid}
+	</delete>
+	
+	<insert id = "insertToBusiness">
+		insert into business(btype, binfo) values(#{btype}, #{binfo})
+	</insert>
+	
+	<select id = "idFromBusiness" resultType = "java.lang.Long">
+		select max(bid) from business
+	</select>
+	
+	<insert id = "insertToConnTable">
+		insert into user_busi_conn(uid, bid) value(#{uid}, #{bid});
+	</insert>
+	
+	<select id = "getConnTableCheck" resultType = "java.lang.Boolean">
+		select id from user_busi_conn where bid = #{bid}
+	</select>
+</mapper>

@@ -3,7 +3,6 @@ package com.zrz.personalWeb.controller;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -98,6 +96,19 @@ public class UserController {
 		String newPwd = jsobj.get("newPwd").toString();
 		
 		if(uservice.updatePwd(name, newPwd) == true)
+			return JSON.toJSONString("success");
+		
+		return JSON.toJSONString("error");
+	}
+	
+	@RequestMapping(value = "/exit", method = RequestMethod.POST)
+	@ResponseBody
+	public String exitSystem(HttpServletRequest request) {
+		HttpSession sess = request.getSession();
+		sess.removeAttribute("uid");
+		sess.removeAttribute("uname");
+		
+		if(sess.getAttribute("uid") == null & sess.getAttribute("uname") == null)
 			return JSON.toJSONString("success");
 		
 		return JSON.toJSONString("error");
