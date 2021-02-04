@@ -3,6 +3,7 @@ package com.zrz.personalWeb.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -74,16 +75,31 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String updateUserInfo(String name, String newName, String newMail) {
+	@ResponseBody
+	public String updateUserInfo(@RequestBody JSONObject jsobj, HttpServletRequest request) {
+		String name = request.getSession().getAttribute("uname").toString();
+		String newName = jsobj.get("newName").toString();
+		
+		if(newName.compareTo("null") != 0)
+			request.getSession().setAttribute("uname", newName);
+		
+		String newMail = jsobj.get("newMail").toString();
+		
 		if(uservice.updateInfo(name, newName, newMail) == true)
-			return "success";
-		return "error";
+			return JSON.toJSONString("success");
+			
+		return JSON.toJSONString("error");
 	}
 
 	@RequestMapping(value = "/updatepwd", method = RequestMethod.POST)
-	public String updatePwd(String name, String newPwd) {
+	@ResponseBody
+	public String updatePwd(@RequestBody JSONObject jsobj, HttpServletRequest request) {
+		String name = request.getSession().getAttribute("uname").toString();
+		String newPwd = jsobj.get("newPwd").toString();
+		
 		if(uservice.updatePwd(name, newPwd) == true)
-			return "success";
-		return "error";
+			return JSON.toJSONString("success");
+		
+		return JSON.toJSONString("error");
 	}
 }
