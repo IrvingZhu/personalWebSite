@@ -43,8 +43,8 @@ public class BusinessController {
 //	search information to right side drawer
 	@RequestMapping(value = "/busiDetail", method = RequestMethod.POST)
 	@ResponseBody
-	public String searchBusiInfo(HttpServletRequest request){
-		Business busi = serv.searchBusiInfo(Long.parseLong(request.getSession().getAttribute("uid").toString()));
+	public String searchBusiInfo(@RequestBody JSONObject jsobj){
+		Business busi = serv.searchBusiInfo(Long.parseLong(jsobj.get("bid").toString()));
 		
 		Map<String, Object> mp = new HashMap<>();
 		mp.put("bid", busi.getBid());

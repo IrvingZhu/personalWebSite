@@ -30,9 +30,9 @@ public class BusiServiceImpl implements BusiService {
 	}
 
 	@Override
-	public Business searchBusiInfo(long uid) {
+	public Business searchBusiInfo(long bid) {
 		// TODO Auto-generated method stub
-		return busiDao.searchBusiInfo(uid);
+		return busiDao.searchBusiInfo(bid);
 	}
 
 	@Override

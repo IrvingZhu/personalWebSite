@@ -16,7 +16,7 @@ public interface BusiService {
 	
 	List<Map<String, Object>> searchBusiKey(long uid);
 	
-	Business searchBusiInfo(long uid);
+	Business searchBusiInfo(long bid);
 	
 	boolean updateBusiInfo(long bid, String btype, String binfo);
 	
