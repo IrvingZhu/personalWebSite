@@ -58,8 +58,14 @@ public class BusiServiceImpl implements BusiService {
 	public boolean deleteBusiness(long bid) {
 		// TODO Auto-generated method stub
 		busiDao.deleteBusi(bid);
-		if (busiDao.getBidCheck(bid) == false)
+
+		try {
+			if (busiDao.getBidCheck(bid) == false)
+				return true;
+		} catch (Exception e) {
 			return true;
+		}
+
 		return false;
 	}
 
@@ -74,7 +80,7 @@ public class BusiServiceImpl implements BusiService {
 
 		if (busiDao.getBidCheck(bid) & busiDao.getConnTableCheck(bid))
 			return true;
-		
+
 		return false;
 	}
 }
