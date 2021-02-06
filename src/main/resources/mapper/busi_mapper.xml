@@ -46,4 +46,8 @@
 	<select id = "getConnTableCheck" resultType = "java.lang.Boolean">
 		select id from user_busi_conn where bid = #{bid}
 	</select>
+	
+	<select id = "addKeyToSearch" resultType = "java.util.Map">
+		select * from business where bid = any(select bid from user_busi_conn where uid = #{uid}) and (btype like "%${first_key}%" or binfo like "%${second_key}%")
+	</select>
 </mapper>

@@ -91,4 +91,14 @@ public class BusinessController {
 		
 		return JSON.toJSONString("error");
 	}
+	
+//search input function
+	@RequestMapping(value = "/searchBusiByKey", method = RequestMethod.POST)
+	@ResponseBody
+	public String searchBusiByKey(@RequestBody JSONObject jsobj, HttpServletRequest request) {
+		long uid = Long.parseLong(request.getSession().getAttribute("uid").toString());
+		String key = jsobj.get("key").toString();
+		
+		return JSON.toJSONString(serv.handleSearchBusi(uid, key));
+	}
 }

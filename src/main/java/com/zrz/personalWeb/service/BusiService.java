@@ -23,4 +23,6 @@ public interface BusiService {
 	boolean deleteBusiness(long bid);
 	
 	boolean handleBusiness(long uid, String btype, String binfo);
+	
+	List<Map<String, Object>> handleSearchBusi(long uid, String key);
 }

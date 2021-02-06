@@ -30,4 +30,6 @@ public interface BusinessMapper {
 	void insertToConnTable(@Param("uid")long uid, @Param("bid")long bid);
 	
 	boolean getConnTableCheck(@Param("bid")long bid);
+	
+	List<Map<String, Object>> addKeyToSearch(@Param("uid")long uid, @Param("first_key")String first_key, @Param("second_key")String second_key);
 }

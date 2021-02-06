@@ -83,4 +83,10 @@ public class BusiServiceImpl implements BusiService {
 
 		return false;
 	}
+	
+	@Override
+	public List<Map<String, Object>> handleSearchBusi(long uid, String key) {
+		
+		return busiDao.addKeyToSearch(uid, key, key);
+	}
 }
