@@ -5,8 +5,10 @@ package com.zrz.personalWeb.service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.locks.Lock;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.integration.redis.util.RedisLockRegistry;
 import org.springframework.stereotype.Service;
 
 import com.zrz.personalWeb.domain.Business;
@@ -22,6 +24,9 @@ public class BusiServiceImpl implements BusiService {
 
 	@Autowired
 	private BusinessMapper busiDao;
+	
+	@Autowired
+	private RedisLockRegistry rlock;
 
 	@Override
 	public List<Map<String, Object>> searchBusiKey(long uid) {
@@ -72,11 +77,19 @@ public class BusiServiceImpl implements BusiService {
 	@Override
 	public boolean handleBusiness(long uid, String btype, String binfo) {
 		// TODO Auto-generated method stub
-		busiDao.insertToBusiness(btype, binfo);
-
-		long bid = busiDao.idFromBusiness();
-
-		busiDao.insertToConnTable(uid, bid);
+		long bid = -1;
+		
+		try {
+			Lock lock = rlock.obtain("lock");
+			while(lock.tryLock() == false);
+			
+			busiDao.insertToBusiness(btype, binfo);
+			bid = busiDao.idFromBusiness();
+			busiDao.insertToConnTable(uid, bid);
+			
+		}catch(Exception e) {
+			return false;
+		}
 
 		if (busiDao.getBidCheck(bid) & busiDao.getConnTableCheck(bid))
 			return true;

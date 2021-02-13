@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zrz.personalWeb.repository.ManageDao">
+	<select id = "searchAllBusiness" resultType = "java.util.Map">
+		select `user`.uname, business.bid, business.btype, business.binfo from (user right join user_busi_conn on `user`.uid = user_busi_conn.uid) 
+		left join business on user_busi_conn.bid = business.bid
+	</select>
+	
+	<insert id = "addBusiness">
+		insert into business(btype, binfo) values(#{btype}, #{binfo})
+	</insert>
+	
+	<select id = "bidFromBusiness" resultType = "java.lang.Long">
+		select max(bid) from business
+	</select>
+	
+	<select id = "searchUid" resultType = "java.lang.Long">
+		select uid from user where uname = #{uname}
+	</select>
+	
+	<insert id = "insertIntoConnectTable">
+		insert into user_busi_conn(uid, bid) values(#{uid}, #{bid})
+	</insert>
+	
+	<update id = "modifyBusinessType">
+		update business set btype = #{btype} where bid = #{bid}
+	</update>
+	
+	<update id = "modifyBusinessInfo">
+		update business set binfo = #{binfo} where bid = #{bid}
+	</update>
+	
+	<delete id = "deleteBusiness">
+		delete from business where bid = #{bid}
+	</delete>
+	
+	<select id = "searchBusinessByKey" resultType = "java.util.Map">
+		select `user`.uname, business.bid, business.btype, business.binfo from (user right join user_busi_conn on `user`.uid = user_busi_conn.uid) 
+		left join business on user_busi_conn.bid = business.bid where `user`.uname like "%${key}%" or business.bid like "%${key}%" or business.btype like "%${key}%"
+		or business.binfo like "%${key}%"
+	</select>
+</mapper>

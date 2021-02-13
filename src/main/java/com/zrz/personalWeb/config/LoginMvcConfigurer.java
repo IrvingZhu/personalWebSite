@@ -21,7 +21,6 @@ public class LoginMvcConfigurer implements WebMvcConfigurer {
 		UserLoginInterceptor ulit = new UserLoginInterceptor();
 		registry.addInterceptor(ulit).addPathPatterns("/**")
 				.excludePathPatterns("/css/**", "/js/**", "/image/**", "/static/**").excludePathPatterns("/index.html")
-				.excludePathPatterns("/login.html").excludePathPatterns("/register.html")
 				.excludePathPatterns("/connManner.html").excludePathPatterns("/personalResume.html")
 				.excludePathPatterns("/").excludePathPatterns("/loginIn").excludePathPatterns("/registerIn")
 				.excludePathPatterns("/info");
@@ -29,7 +28,7 @@ public class LoginMvcConfigurer implements WebMvcConfigurer {
 
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
-		registry.addMapping("/**").allowedHeaders("*").allowedOrigins("http://localhost:8080")
+		registry.addMapping("/**").allowedHeaders("*").allowedOrigins("http://localhost:8080").allowedOrigins("http://192.168.2.185:8080")
 				.allowedMethods("POST", "GET", "PUT", "OPTIONS", "DELETE").maxAge(3600).allowCredentials(true);
 	}
 }
