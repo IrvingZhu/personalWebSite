@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,9 +28,10 @@ public class ManageController {
 	@Autowired
 	ManageService manaServ;
 
-	@RequestMapping(value = "/manageSearchAll", method = RequestMethod.POST)
-	public String searchAllBusiness() {
-		return JSON.toJSONString(manaServ.searchAllBusiness());
+	@RequestMapping(value = "/manageSearchAll", method = RequestMethod.GET)
+	public String searchAllBusiness(@RequestParam(value = "begin", required = true, defaultValue = "0") int begin,
+									@RequestParam(value = "num", required = true, defaultValue = "0") int num) {
+		return JSON.toJSONString(manaServ.searchAllBusiness(begin, num));
 	}
 	
 	@RequestMapping(value = "/manageAdd", method = RequestMethod.POST)
@@ -70,11 +72,10 @@ public class ManageController {
 		return JSON.toJSONString("error");
 	}
 	
-	@RequestMapping(value = "/manageSearchByKey", method = RequestMethod.POST)
+	@RequestMapping(value = "/manageSearchByKey", method = RequestMethod.GET)
 	@ResponseBody
-	public String searchAllByKey(@RequestBody JSONObject jsobj) {
-		String key = jsobj.get("key").toString();
-		
+	public String searchAllByKey(@RequestParam(value = "key", required = true, defaultValue = "0") String key) {
+
 		return JSON.toJSONString(manaServ.searchBusiByKey(key));
 	}
 }

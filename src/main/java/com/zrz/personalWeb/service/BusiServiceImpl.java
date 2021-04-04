@@ -29,9 +29,9 @@ public class BusiServiceImpl implements BusiService {
 	private RedisLockRegistry rlock;
 
 	@Override
-	public List<Map<String, Object>> searchBusiKey(long uid) {
+	public List<Map<String, Object>> searchBusiKey(long uid, int begin, int num) {
 		// TODO Auto-generated method stub
-		return busiDao.searchBusiKey(uid);
+		return busiDao.searchBusiKey(uid, begin, num);
 	}
 
 	@Override

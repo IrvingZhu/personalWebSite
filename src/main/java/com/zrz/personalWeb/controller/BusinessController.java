@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -34,17 +35,19 @@ public class BusinessController {
 	private BusiService serv;
 	
 //	search business key to front-end's table
-	@RequestMapping(value = "/searchBusi", method = RequestMethod.POST)
+	@RequestMapping(value = "/searchBusi", method = RequestMethod.GET)
 	@ResponseBody
-	public String searchBusiKey(HttpServletRequest request){
-		return JSON.toJSONString(serv.searchBusiKey(Long.parseLong(request.getSession().getAttribute("uid").toString())));
+	public String searchBusiKey(HttpServletRequest request,
+								@RequestParam(value = "begin", required = true, defaultValue = "0") int begin,
+								@RequestParam(value = "num", required = true, defaultValue = "0") int num){
+		return JSON.toJSONString(serv.searchBusiKey(Long.parseLong(request.getSession().getAttribute("uid").toString()), begin, num));
 	}
 	
 //	search information to right side drawer
-	@RequestMapping(value = "/busiDetail", method = RequestMethod.POST)
+	@RequestMapping(value = "/busiDetail", method = RequestMethod.GET)
 	@ResponseBody
-	public String searchBusiInfo(@RequestBody JSONObject jsobj){
-		Business busi = serv.searchBusiInfo(Long.parseLong(jsobj.get("bid").toString()));
+	public String searchBusiInfo(@RequestParam(value = "bid", required = true, defaultValue = "0") long bid){
+		Business busi = serv.searchBusiInfo(bid);
 		
 		Map<String, Object> mp = new HashMap<>();
 		mp.put("bid", busi.getBid());
@@ -93,12 +96,11 @@ public class BusinessController {
 	}
 	
 //search input function
-	@RequestMapping(value = "/searchBusiByKey", method = RequestMethod.POST)
+	@RequestMapping(value = "/searchBusiByKey", method = RequestMethod.GET)
 	@ResponseBody
-	public String searchBusiByKey(@RequestBody JSONObject jsobj, HttpServletRequest request) {
-		long uid = Long.parseLong(request.getSession().getAttribute("uid").toString());
-		String key = jsobj.get("key").toString();
+	public String searchBusiByKey(HttpServletRequest request,
+								  @RequestParam(value = "key", required = true, defaultValue = "0") String key) {
 		
-		return JSON.toJSONString(serv.handleSearchBusi(uid, key));
+		return JSON.toJSONString(serv.handleSearchBusi(Long.parseLong(request.getSession().getAttribute("uid").toString()), key));
 	}
 }

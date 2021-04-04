@@ -29,9 +29,9 @@ public class ManageServiceImpl implements ManageService {
 	private RedisLockRegistry rlock;
 
 	@Override
-	public List<Map<String, Object>> searchAllBusiness() {
+	public List<Map<String, Object>> searchAllBusiness(int begin, int num) {
 		// TODO Auto-generated method stub
-		return manaDao.searchAllBusiness();
+		return manaDao.searchAllBusiness(begin, num);
 	}
 
 	@Override

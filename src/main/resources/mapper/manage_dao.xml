@@ -3,7 +3,7 @@
 <mapper namespace="com.zrz.personalWeb.repository.ManageDao">
 	<select id = "searchAllBusiness" resultType = "java.util.Map">
 		select `user`.uname, business.bid, business.btype, business.binfo from (user right join user_busi_conn on `user`.uid = user_busi_conn.uid) 
-		left join business on user_busi_conn.bid = business.bid
+		left join business on user_busi_conn.bid = business.bid limit ${begin}, ${num}
 	</select>
 	
 	<insert id = "addBusiness">

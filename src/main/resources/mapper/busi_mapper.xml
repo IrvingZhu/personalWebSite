@@ -8,7 +8,7 @@
 	</resultMap>
 	
 	<select id = "searchBusiKey" parameterType = "java.lang.Long" resultType = "java.util.Map">
-		select bid, btype from business where bid = any(select bid from user_busi_conn where uid = #{uid})
+		select bid, btype from business where bid = any(select bid from user_busi_conn where uid = #{uid}) limit ${begin}, ${num}
 	</select>
 	
 	<select id = "searchBusiInfo" parameterType = "java.lang.Long" resultType = "com.zrz.personalWeb.domain.Business">
