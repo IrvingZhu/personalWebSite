@@ -25,8 +25,10 @@ public class ManageServiceImpl implements ManageService {
 	@Autowired
 	ManageDao manaDao;
 	
-	@Autowired
-	private RedisLockRegistry rlock;
+	@Override
+	public int searchTotalNum() {
+		return manaDao.searchTotalNum();
+	}
 
 	@Override
 	public List<Map<String, Object>> searchAllBusiness(int begin, int num) {
@@ -38,8 +40,6 @@ public class ManageServiceImpl implements ManageService {
 	public synchronized boolean addBusiness(String uname, String btype, String binfo) {
 		// TODO Auto-generated method stub
 		try {
-			Lock lock = rlock.obtain("lock");
-			while(lock.tryLock() == false);
 			
 			manaDao.addBusiness(btype, binfo);
 
@@ -48,7 +48,6 @@ public class ManageServiceImpl implements ManageService {
 
 			manaDao.insertIntoConnectTable(uid, bid);
 			
-			lock.unlock();
 		}catch(Exception e) {
 			return false;
 		}

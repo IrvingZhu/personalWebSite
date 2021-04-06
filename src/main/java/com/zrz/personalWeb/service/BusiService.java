@@ -14,6 +14,8 @@ import com.zrz.personalWeb.domain.Business;
  */
 public interface BusiService {
 	
+	int searchBusiNum(long uid);
+	
 	List<Map<String, Object>> searchBusiKey(long uid, int begin, int num);
 	
 	Business searchBusiInfo(long bid);

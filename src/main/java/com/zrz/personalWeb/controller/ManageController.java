@@ -27,8 +27,15 @@ public class ManageController {
 	
 	@Autowired
 	ManageService manaServ;
+	
+	@RequestMapping(value = "/manageSearchTotal", method = RequestMethod.GET)
+	public String searchTotalNum() {
+		
+		return Integer.toString(manaServ.searchTotalNum());
+	}
 
 	@RequestMapping(value = "/manageSearchAll", method = RequestMethod.GET)
+	@ResponseBody
 	public String searchAllBusiness(@RequestParam(value = "begin", required = true, defaultValue = "0") int begin,
 									@RequestParam(value = "num", required = true, defaultValue = "0") int num) {
 		return JSON.toJSONString(manaServ.searchAllBusiness(begin, num));

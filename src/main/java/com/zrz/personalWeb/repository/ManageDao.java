@@ -17,6 +17,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ManageDao {
 	
+	public int searchTotalNum();
+	
 	public List<Map<String, Object>> searchAllBusiness(int begin, int end);
 	
 	public void addBusiness(@Param("btype")String btype, @Param("binfo")String binfo);

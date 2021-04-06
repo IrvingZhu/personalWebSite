@@ -25,8 +25,11 @@ public class BusiServiceImpl implements BusiService {
 	@Autowired
 	private BusinessMapper busiDao;
 	
-	@Autowired
-	private RedisLockRegistry rlock;
+	@Override
+	public int searchBusiNum(long uid) {
+		// TODO Auto-generated method stub
+		return busiDao.searchBusiNum(uid);
+	}
 
 	@Override
 	public List<Map<String, Object>> searchBusiKey(long uid, int begin, int num) {
@@ -75,13 +78,11 @@ public class BusiServiceImpl implements BusiService {
 	}
 
 	@Override
-	public boolean handleBusiness(long uid, String btype, String binfo) {
+	public synchronized boolean handleBusiness(long uid, String btype, String binfo) {
 		// TODO Auto-generated method stub
 		long bid = -1;
 		
 		try {
-			Lock lock = rlock.obtain("lock");
-			while(lock.tryLock() == false);
 			
 			busiDao.insertToBusiness(btype, binfo);
 			bid = busiDao.idFromBusiness();

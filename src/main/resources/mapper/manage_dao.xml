@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zrz.personalWeb.repository.ManageDao">
+	<select id = "searchTotalNum" resultType = "java.lang.Integer">
+		select count(id) from user_busi_conn
+	</select>
+
 	<select id = "searchAllBusiness" resultType = "java.util.Map">
 		select `user`.uname, business.bid, business.btype, business.binfo from (user right join user_busi_conn on `user`.uid = user_busi_conn.uid) 
 		left join business on user_busi_conn.bid = business.bid limit ${begin}, ${num}

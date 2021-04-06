@@ -34,12 +34,21 @@ public class BusinessController {
 	@Autowired
 	private BusiService serv;
 	
+//	search business total number
+	@RequestMapping(value = "/getTotalResult", method = RequestMethod.GET)
+	@ResponseBody
+	public String searchBusiNum(HttpServletRequest request) {
+		
+		return Integer.toString(serv.searchBusiNum(Long.parseLong(request.getSession().getAttribute("uid").toString())));
+	}
+	
 //	search business key to front-end's table
 	@RequestMapping(value = "/searchBusi", method = RequestMethod.GET)
 	@ResponseBody
 	public String searchBusiKey(HttpServletRequest request,
 								@RequestParam(value = "begin", required = true, defaultValue = "0") int begin,
 								@RequestParam(value = "num", required = true, defaultValue = "0") int num){
+		
 		return JSON.toJSONString(serv.searchBusiKey(Long.parseLong(request.getSession().getAttribute("uid").toString()), begin, num));
 	}
 	

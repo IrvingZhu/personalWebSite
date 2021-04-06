@@ -12,6 +12,8 @@ import java.util.Map;
  */
 public interface ManageService {
 	
+	public int searchTotalNum();
+	
 	public List<Map<String, Object>> searchAllBusiness(int begin, int num);
 	
 	public boolean addBusiness(String uname, String btype, String binfo);

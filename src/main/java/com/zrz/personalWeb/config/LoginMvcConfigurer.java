@@ -29,6 +29,7 @@ public class LoginMvcConfigurer implements WebMvcConfigurer {
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
 		registry.addMapping("/**").allowedHeaders("*").allowedOrigins("http://localhost:8080").allowedOrigins("http://192.168.2.185:8080")
+				.allowedOrigins("http://10.2.161.89:8080")
 				.allowedMethods("POST", "GET", "PUT", "OPTIONS", "DELETE").maxAge(3600).allowCredentials(true);
 	}
 }

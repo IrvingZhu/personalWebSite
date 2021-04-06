@@ -11,6 +11,8 @@ import com.zrz.personalWeb.domain.Business;
 @Repository
 public interface BusinessMapper {
 	
+	int searchBusiNum(long uid);
+	
 	List<Map<String, Object>> searchBusiKey(long uid, int begin, int num);
 	
 	Business searchBusiInfo(long bid);
