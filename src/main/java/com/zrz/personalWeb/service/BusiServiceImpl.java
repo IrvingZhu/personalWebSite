@@ -99,8 +99,13 @@ public class BusiServiceImpl implements BusiService {
 	}
 	
 	@Override
-	public List<Map<String, Object>> handleSearchBusi(long uid, String key) {
-		
-		return busiDao.addKeyToSearch(uid, key, key);
+	public int searchBusiKeyNum(long uid, String key) {
+		return busiDao.searchBusiKeyNum(uid, key, key);
+	}
+	
+	@Override
+	public List<Map<String, Object>> handleSearchBusi(long uid, String key, int begin, int num) {
+		// TODO Auto-generated method stub
+		return busiDao.addKeyToSearch(uid, key, key, begin, num);
 	}
 }

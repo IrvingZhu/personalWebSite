@@ -13,7 +13,7 @@ public interface BusinessMapper {
 	
 	int searchBusiNum(long uid);
 	
-	List<Map<String, Object>> searchBusiKey(long uid, int begin, int num);
+	List<Map<String, Object>> searchBusiKey(@Param("uid")long uid, @Param("begin")int begin, @Param("num")int num);
 	
 	Business searchBusiInfo(long bid);
 	
@@ -33,5 +33,7 @@ public interface BusinessMapper {
 	
 	boolean getConnTableCheck(@Param("bid")long bid);
 	
-	List<Map<String, Object>> addKeyToSearch(@Param("uid")long uid, @Param("first_key")String first_key, @Param("second_key")String second_key);
+	int searchBusiKeyNum(@Param("uid")long uid, @Param("first_key")String first_key, @Param("second_key")String second_key);
+	
+	List<Map<String, Object>> addKeyToSearch(@Param("uid")long uid, @Param("first_key")String first_key, @Param("second_key")String second_key, @Param("begin")int begin, @Param("num")int num);
 }

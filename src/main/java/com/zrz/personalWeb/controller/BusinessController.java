@@ -104,12 +104,23 @@ public class BusinessController {
 		return JSON.toJSONString("error");
 	}
 	
+	
+	@RequestMapping(value = "/searchBusiKeyNum", method = RequestMethod.GET)
+	@ResponseBody
+	public String searchBusiByKeyNum(HttpServletRequest request,
+									 @RequestParam(value = "key", required = true, defaultValue = "0") String key) {
+		
+		return Integer.toString(serv.searchBusiKeyNum(Long.parseLong(request.getSession().getAttribute("uid").toString()), key));
+	}
+	
 //search input function
 	@RequestMapping(value = "/searchBusiByKey", method = RequestMethod.GET)
 	@ResponseBody
 	public String searchBusiByKey(HttpServletRequest request,
-								  @RequestParam(value = "key", required = true, defaultValue = "0") String key) {
+								  @RequestParam(value = "key", required = true, defaultValue = "0") String key,
+								  @RequestParam(value = "begin", required = true, defaultValue = "0") int begin,
+								  @RequestParam(value = "num", required = true, defaultValue = "0") int num) {
 		
-		return JSON.toJSONString(serv.handleSearchBusi(Long.parseLong(request.getSession().getAttribute("uid").toString()), key));
+		return JSON.toJSONString(serv.handleSearchBusi(Long.parseLong(request.getSession().getAttribute("uid").toString()), key, begin, num));
 	}
 }

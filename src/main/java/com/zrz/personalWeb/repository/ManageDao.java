@@ -19,7 +19,7 @@ public interface ManageDao {
 	
 	public int searchTotalNum();
 	
-	public List<Map<String, Object>> searchAllBusiness(int begin, int end);
+	public List<Map<String, Object>> searchAllBusiness(@Param("begin")int begin, @Param("num")int num);
 	
 	public void addBusiness(@Param("btype")String btype, @Param("binfo")String binfo);
 	
@@ -35,5 +35,7 @@ public interface ManageDao {
 	
 	public boolean deleteBusiness(long bid);
 	
-	public List<Map<String, Object>> searchBusinessByKey(String key);
+	public int searchTotalKeyNum(@Param("key")String key);
+	
+	public List<Map<String, Object>> searchBusinessByKey(@Param("key")String key, @Param("begin")int begin, @Param("num")int num);
 }

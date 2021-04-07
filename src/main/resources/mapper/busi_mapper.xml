@@ -51,7 +51,11 @@
 		select id from user_busi_conn where bid = #{bid}
 	</select>
 	
+	<select id = "searchBusiKeyNum" resultType = "java.lang.Integer">
+		select count(bid) from business where bid = any(select bid from user_busi_conn where uid = #{uid}) and (btype like "%${first_key}%" or binfo like "%${second_key}%")
+	</select>
+	
 	<select id = "addKeyToSearch" resultType = "java.util.Map">
-		select * from business where bid = any(select bid from user_busi_conn where uid = #{uid}) and (btype like "%${first_key}%" or binfo like "%${second_key}%")
+		select * from business where bid = any(select bid from user_busi_conn where uid = #{uid}) and (btype like "%${first_key}%" or binfo like "%${second_key}%") limit ${begin}, ${num}
 	</select>
 </mapper>

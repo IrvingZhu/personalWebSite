@@ -26,5 +26,7 @@ public interface BusiService {
 	
 	boolean handleBusiness(long uid, String btype, String binfo);
 	
-	List<Map<String, Object>> handleSearchBusi(long uid, String key);
+	int searchBusiKeyNum(long uid, String key);
+	
+	List<Map<String, Object>> handleSearchBusi(long uid, String key, int begin, int num);
 }

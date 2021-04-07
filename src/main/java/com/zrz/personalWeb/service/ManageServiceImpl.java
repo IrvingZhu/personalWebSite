@@ -83,10 +83,16 @@ public class ManageServiceImpl implements ManageService {
 		
 		return true;
 	}
+	
+	@Override
+	public int searchTotalKeyNum(String key) {
+		// TODO Auto-generated method stub
+		return manaDao.searchTotalKeyNum(key);
+	}
 
 	@Override
-	public List<Map<String, Object>> searchBusiByKey(String key) {
+	public List<Map<String, Object>> searchBusiByKey(String key, int begin, int num) {
 		// TODO Auto-generated method stub
-		return manaDao.searchBusinessByKey(key);
+		return manaDao.searchBusinessByKey(key, begin, num);
 	}
 }

@@ -79,10 +79,19 @@ public class ManageController {
 		return JSON.toJSONString("error");
 	}
 	
+	@RequestMapping(value = "/manageSearchTotalKeyNum", method = RequestMethod.GET)
+	@ResponseBody
+	public String searchTotalKeyNum(@RequestParam(value = "key", required = true, defaultValue = "0") String key) {
+		
+		return Integer.toString(manaServ.searchTotalKeyNum(key));
+	}
+	
 	@RequestMapping(value = "/manageSearchByKey", method = RequestMethod.GET)
 	@ResponseBody
-	public String searchAllByKey(@RequestParam(value = "key", required = true, defaultValue = "0") String key) {
+	public String searchAllByKey(@RequestParam(value = "key", required = true, defaultValue = "0") String key,
+								 @RequestParam(value = "begin", required = true, defaultValue = "0") int begin,
+								 @RequestParam(value = "num", required = true, defaultValue = "0") int num) {
 
-		return JSON.toJSONString(manaServ.searchBusiByKey(key));
+		return JSON.toJSONString(manaServ.searchBusiByKey(key, begin, num));
 	}
 }

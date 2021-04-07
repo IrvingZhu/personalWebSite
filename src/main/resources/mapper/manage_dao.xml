@@ -38,9 +38,15 @@
 		delete from business where bid = #{bid}
 	</delete>
 	
+	<select id = "searchTotalKeyNum" resultType = "java.lang.Integer">
+		select count(user_busi_conn.id) from (user right join user_busi_conn on `user`.uid = user_busi_conn.uid) 
+		left join business on user_busi_conn.bid = business.bid where `user`.uname like "%${key}%" or business.bid like "%${key}%" or business.btype like "%${key}%"
+		or business.binfo like "%${key}%" 
+	</select>
+	
 	<select id = "searchBusinessByKey" resultType = "java.util.Map">
 		select `user`.uname, business.bid, business.btype, business.binfo from (user right join user_busi_conn on `user`.uid = user_busi_conn.uid) 
 		left join business on user_busi_conn.bid = business.bid where `user`.uname like "%${key}%" or business.bid like "%${key}%" or business.btype like "%${key}%"
-		or business.binfo like "%${key}%"
+		or business.binfo like "%${key}%" limit ${begin}, ${num}
 	</select>
 </mapper>

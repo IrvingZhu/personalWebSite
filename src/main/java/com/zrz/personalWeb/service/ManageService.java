@@ -22,5 +22,7 @@ public interface ManageService {
 	
 	public boolean deleteBusiness(long bid);
 	
-	public List<Map<String, Object>> searchBusiByKey(String key);
+	public int searchTotalKeyNum(String key);
+	
+	public List<Map<String, Object>> searchBusiByKey(String key, int begin, int num);
 }
