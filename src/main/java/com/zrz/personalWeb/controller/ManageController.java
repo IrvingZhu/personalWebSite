@@ -38,12 +38,13 @@ public class ManageController {
 	@ResponseBody
 	public String searchAllBusiness(@RequestParam(value = "begin", required = true, defaultValue = "0") int begin,
 									@RequestParam(value = "num", required = true, defaultValue = "0") int num) {
+		
 		return JSON.toJSONString(manaServ.searchAllBusiness(begin, num));
 	}
 	
 	@RequestMapping(value = "/manageAdd", method = RequestMethod.POST)
 	@ResponseBody
-	public synchronized String addBusiness(@RequestBody JSONObject jsobj) {
+	public String addBusiness(@RequestBody JSONObject jsobj) {
 		String uname = jsobj.get("uname").toString();
 		String btype = jsobj.get("btype").toString();
 		String binfo = jsobj.get("binfo").toString();
